@@ -319,4 +319,14 @@ plot_df(df_nighttime, df_lbs, title='Dart in Nighttime 10pm - 4am')
 ```
 ![20170823-night](pics/20170823_night.png?raw=true)
 
+## Insights
+1. During daytime, both the footfall count and the distribution area tends to be larger than night
+2. The geo-location of the cell tower also matters a lot. For example, if it's near a large mrt station, the weekday vs. weekend difference is not very large. But for a cell tower in residential area (many HDBs), the weekday vs. weekend distribution is quite obvious.
 
+For some cell tower level demo, please refer to the confluence page: [20170924 Cell Coverage by Mysingtel Dart Data](https://dataspark.atlassian.net/wiki/spaces/DSS/pages/104300584/20170924+Cell+Coverage+by+Mysingtel+Dart+Data) 
+
+
+## Limitations
+
+1. The time match is not exact match. If the IMSI device is moving rapidly (e.g. on express way), the error from the dart location will be large.
+2. The dart data I use to match with LBS is shixin's transformed dart data (on staging `hdfs:/user/luoshixin/dart_transformed/`). MySingtel DART data is quite messy, i.e. today's dart data may contain the data from one month ago. Shixin's transformed data take into 3 days' raw dart data to get output for 1 day. 
