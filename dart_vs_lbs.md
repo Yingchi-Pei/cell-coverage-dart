@@ -44,19 +44,6 @@ df.head(2)
 
 
 <div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -134,19 +121,6 @@ df_sortcell.head(10)
 
 
 <div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -270,6 +244,8 @@ df_use['colors'] = df_use['cellid'].map(lambda x: cells_colors[x])
 df_lbs = df_use[['cellid', 'lat_lbs', 'lon_lbs', 'colors']]
 ```
 
+Footfall distribution for the whole day 
+
 ```python
 map_options = GMapOptions(lat=1.353, lng=103.83, map_type="roadmap", zoom=12)
 
@@ -309,7 +285,7 @@ def plot_df(df_dart, df_lbs, title='Dart plot'):
 plot_df(df_use, df_lbs, 'MySingtel Dart Data vs. LBS on '+doi)
 
 ```
-![](/pics/20170823_all)
+![20170823-all](pics/20170823_all.png?raw=true)
 
 ```python
 import datetime
@@ -324,13 +300,16 @@ def within_time(start, end, time_str):
 start_time = datetime.time(10, 0, 0)
 end_time = datetime.time(16, 0, 0)
 ```
+Distribution from 10am to 4pm (Day)
 
 ```python
 df_daytime = df_use[df_use.apply(lambda x: within_time(start_time, end_time, x['time_dart']), axis=1)]
 map_options = GMapOptions(lat=1.34, lng=103.75, map_type="roadmap", zoom=14)
 plot_df(df_daytime, df_lbs, title='Dart in Daytime 10am - 4pm')
 ```
-![](/pics/20170823_day)
+![20170823-day](pics/20170823_day.png?raw=true)
+
+Distribution from 10pm to 4am (Night)
 
 ```python
 start_time = datetime.time(22, 0, 0)
@@ -338,6 +317,6 @@ end_time = datetime.time(4, 0, 0)
 df_nighttime = df_use[df_use.apply(lambda x: within_time(start_time, end_time, x['time_dart']), axis=1)]
 plot_df(df_nighttime, df_lbs, title='Dart in Nighttime 10pm - 4am')
 ```
-![](/pics/20170823_night)
+![20170823-night](pics/20170823_night.png?raw=true)
 
 
